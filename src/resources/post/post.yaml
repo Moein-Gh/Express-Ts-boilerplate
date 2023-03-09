@@ -1,0 +1,56 @@
+{
+  'paths':
+    {
+      '/api/posts/create':
+        {
+          'post':
+            {
+              'tags': ['posts'],
+              'description': 'create a new post',
+              'requestBody':
+                {
+                  'content':
+                    {
+                      'application/json':
+                        {
+                          'schema':
+                            {
+                              'type': 'object',
+                              'properties':
+                                {
+                                  'title':
+                                    { 'type': 'string', 'example': 'string' },
+                                  'body':
+                                    { 'type': 'string', 'example': 'string' },
+                                },
+                            },
+                        },
+                    },
+                },
+
+              'responses':
+                {
+                  '201':
+                    {
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'type': 'object',
+                                  'properties':
+                                    {
+                                      'title': { 'type': 'string' },
+                                      'body': { 'type': 'string' },
+                                      '_id': { 'type': 'string' },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+}
