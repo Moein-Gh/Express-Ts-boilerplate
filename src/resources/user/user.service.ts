@@ -1,8 +1,7 @@
 import UserModel from '@/resources/user/user.model';
-import userModel from '@/resources/user/user.model';
-
+import emailConfig from '@/root/emailConfig';
 import token from '@/utils/token';
-import { string } from 'joi';
+import axios from 'axios';
 import { RegisterRequirements } from './user.customTypes';
 
 class UserService {
@@ -51,6 +50,29 @@ class UserService {
       return false;
     } catch (error) {
       throw new Error('Unable to login user');
+    }
+  }
+
+  public async subscribeUser(email: string, name: string) {
+    try {
+      const resp = await axios.post(
+        emailConfig.emailBaseUrl + 'api/subscribers',
+        {
+          email: 'example@example.com',
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + emailConfig.emailToken,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (resp.status == 200) {
+        return resp.data;
+      }
+    } catch (error) {
+      console.log(error);
+      throw new Error('Unable to subscribe user');
     }
   }
 }

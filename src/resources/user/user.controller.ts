@@ -29,7 +29,9 @@ class UserController implements Controller {
       this.login
     );
 
-    this.router.get('/users', authenticated, this.getUser);
+    this.router.post('/users/subscribe', this.subscribeUserToEmail);
+
+    this.router.get('/users/getData/:id', authenticated, this.getUser);
   }
 
   private register = async (
@@ -93,13 +95,31 @@ class UserController implements Controller {
       let { email } = req.body;
 
       const isEmailUnique = await this.UserService.isEmailUnique(email);
-      console.log(isEmailUnique);
+
       if (!isEmailUnique) {
         next(new HttpException(409, 'ایمیل وارد شده تکراری است'));
       }
       logMiddleware('isEmailUnique');
       return next();
     } catch (error) {
+      next(new HttpException(401, 'unable to login user'));
+    }
+  };
+
+  private subscribeUserToEmail = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      let { email, name } = req.body;
+
+      const user = await this.UserService.subscribeUser(email, name);
+
+      logMiddleware('subscribeUserToEmail');
+      res.send(user);
+    } catch (error) {
+      console.log(error);
       next(new HttpException(401, 'unable to login user'));
     }
   };
