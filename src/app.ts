@@ -17,6 +17,7 @@ class App {
   constructor(controllers: Controller[], port: number) {
     this.express = express();
     this.port = port;
+
     this.initializeDatabaseConnection();
     this.initializeMiddleware();
     this.initializeControllers(controllers);
