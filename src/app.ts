@@ -1,11 +1,11 @@
-import express, { Application } from 'express';
-import mongoose from 'mongoose';
+import ErrorMiddleware from '@/middleware/error.middleware';
+import Controller from '@/utils/interfaces/controller.interface';
 import compression from 'compression';
 import cors from 'cors';
-import morgan from 'morgan';
-import Controller from '@/utils/interfaces/controller.interface';
-import ErrorMiddleware from '@/middleware/error.middleware';
+import express, { Application } from 'express';
 import helmet from 'helmet';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
 
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi, { SwaggerUiOptions } from 'swagger-ui-express';

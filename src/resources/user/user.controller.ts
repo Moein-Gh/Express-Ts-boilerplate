@@ -1,11 +1,11 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import Controller from '@/root/utils/interfaces/controller.interface';
-import HttpException from '@/root/utils/exceptions/http.exceptions';
-import validationMiddleware from '@/root/middleware/validation.middleware';
-import validate from '@/resources/user/user.validation';
-import UserService from '@/resources/user/user.service';
 import authenticated from '@/middleware/authenticated.middleware';
+import UserService from '@/resources/user/user.service';
+import validate from '@/resources/user/user.validation';
 import logMiddleware from '@/root/functions/logMiddleware';
+import validationMiddleware from '@/root/middleware/validation.middleware';
+import HttpException from '@/root/utils/exceptions/http.exceptions';
+import Controller from '@/root/utils/interfaces/controller.interface';
+import { NextFunction, Request, Response, Router } from 'express';
 
 class UserController implements Controller {
   public path = '/users';
